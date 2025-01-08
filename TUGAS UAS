@@ -1,0 +1,64 @@
+class Mobil:
+    def _init_(self, merk, tipe, harga):
+        self.merk = merk
+        self.tipe = tipe
+        self.harga = harga
+
+    def _str_(self):
+        return f"{self.merk} {self.tipe} - Harga: {self.harga}"
+
+class PenjualanMobil:
+    def _init_(self):
+        self.daftar_mobil_terjual = []
+
+    def tambah_penjualan(self, mobil):
+        self.daftar_mobil_terjual.append(mobil)
+        print(f"{mobil.merk} {mobil.tipe} berhasil ditambahkan ke penjualan.")
+
+    def total_penjualan(self):
+        total = sum([mobil.harga for mobil in self.daftar_mobil_terjual])
+        return total
+
+    def daftar_mobil(self):
+        if not self.daftar_mobil_terjual:
+            print("Belum ada mobil yang terjual.")
+        else:
+            print("Daftar Mobil Terjual:")
+            for mobil in self.daftar_mobil_terjual:
+                print(mobil)
+
+def main():
+    penjualan = PenjualanMobil()
+    
+    while True:
+        print("\n--- Sistem Penjualan Mobil ---")
+        print("1. Tambah Penjualan Mobil")
+        print("2. Lihat Daftar Mobil Terjual")
+        print("3. Lihat Total Penjualan")
+        print("4. Keluar")
+        
+        pilihan = input("Pilih opsi (1/2/3/4): ")
+
+        if pilihan == '1':
+            merk = input("Masukkan merk mobil: ")
+            tipe = input("Masukkan tipe mobil: ")
+            harga = int(input("Masukkan harga mobil: "))
+            mobil_baru = Mobil(merk, tipe, harga)
+            penjualan.tambah_penjualan(mobil_baru)
+        
+        elif pilihan == '2':
+            penjualan.daftar_mobil()
+        
+        elif pilihan == '3':
+            total = penjualan.total_penjualan()
+            print(f"Total penjualan mobil: {total}")
+        
+        elif pilihan == '4':
+            print("Terima kasih! Program selesai.")
+            break
+        
+        else:
+            print("Pilihan tidak valid, coba lagi.")
+
+if _name_ == "_main_":
+    main()
